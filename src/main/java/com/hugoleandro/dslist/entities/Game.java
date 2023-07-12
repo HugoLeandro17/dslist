@@ -8,19 +8,36 @@ import java.util.Objects;
 @Entity
 @Table(name = "Game")
 public class Game {
+    // Tipos primitivos de dados (int) vs Classes derivadas dos tipos primitivos de dados (Integer):
+        // Tipos primitivos de dados não aceitam valores NULL
+        // Classes derivadas dis tipos primitivos já permitem valores NULL
+        // Utilizar tipo primitivos de dados para campos que são de preenchimento obrigatório, porque o objetivo não é
+        // armazenar valores NULL e porque os tipos primitivos sãos mais eficientes
+        // Utilizar as classes derivadas dos tipos primitivos para campos que não sejam de preenchimento obrigatório,
+        // já que são esperados valores NULL
     @Id // Anotação para definir uma chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Anotação para definir Auto Incremento
     private Long id;
+
     private String title;
 
-    @Column(name = "gameYear")
+    @Column(name = "gameYear") // Anotação para definir o nome do campo na DB
     private Integer year;
+
     private String genre;
+
     private String platforms;
+
     private Double score;
+
     private String imgUrl;
+
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
+
 
     public Game() {}
 
