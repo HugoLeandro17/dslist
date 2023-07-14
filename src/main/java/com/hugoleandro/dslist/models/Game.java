@@ -1,4 +1,4 @@
-package com.hugoleandro.dslist.entities;
+package com.hugoleandro.dslist.models;
 
 import jakarta.persistence.*;
 
