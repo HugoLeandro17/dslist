@@ -3,6 +3,7 @@ package com.hugoleandro.dslist.services;
 import com.hugoleandro.dslist.dto.GameAllDTO;
 import com.hugoleandro.dslist.dto.GameDTO;
 import com.hugoleandro.dslist.models.Game;
+import com.hugoleandro.dslist.projections.GameMinProjection;
 import com.hugoleandro.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,12 @@ public class GameService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Game with id %d not found", id));
 
         return new GameAllDTO(game.get());
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameDTO> findByList(Long gameListId) {
+        List<GameMinProjection> gamesByList = gameRepository.searchByList(gameListId);
+
+        return gamesByList.stream().map(gameProjection -> new GameDTO(gameProjection)).toList();
     }
 }

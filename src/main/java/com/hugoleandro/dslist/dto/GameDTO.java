@@ -10,6 +10,7 @@ package com.hugoleandro.dslist.dto;
 // classe simples de forma a otimizar a comunicação.
 
 import com.hugoleandro.dslist.models.Game;
+import com.hugoleandro.dslist.projections.GameMinProjection;
 
 public class GameDTO {
     private Long id;
@@ -26,6 +27,14 @@ public class GameDTO {
         this.year = entity.getYear();
         this.imgUrl = entity.getImgUrl();
         this.shortDescription = entity.getShortDescription();
+    }
+
+    public GameDTO(GameMinProjection projection) {
+        this.id = projection.getId();
+        this.title = projection.getTitle();
+        this.year = projection.getYear();
+        this.imgUrl = projection.getImgUrl();
+        this.shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {
