@@ -2,13 +2,11 @@ package com.hugoleandro.dslist.controllers;
 
 import com.hugoleandro.dslist.dto.GameDTO;
 import com.hugoleandro.dslist.dto.GameListDTO;
+import com.hugoleandro.dslist.dto.ReplacementDTO;
 import com.hugoleandro.dslist.services.GameListService;
 import com.hugoleandro.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +27,10 @@ public class GameListController {
     @GetMapping(value = "/{gameListId}/games")
     public List<GameDTO> findByList(@PathVariable Long gameListId) {
         return gameService.findByList(gameListId);
+    }
+
+    @PostMapping(value = "/{gameListId}/replacement")
+    public void move(@PathVariable Long gameListId, @RequestBody ReplacementDTO body) {
+        gameListService.move(gameListId, body.getSourceIndex(), body.getDestinationIndex());
     }
 }
